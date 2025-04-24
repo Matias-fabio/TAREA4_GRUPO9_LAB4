@@ -86,7 +86,7 @@ public class Ejercicio1 extends JFrame {
 		textFechaNac.setColumns(10);
 		
 		JLabel lblDatosIngresados = new JLabel("Los Datos Ingresadors Fueron:");
-		lblDatosIngresados.setBounds(10, 209, 163, 14);
+		lblDatosIngresados.setBounds(10, 209, 333, 14);
 		contentPane.add(lblDatosIngresados);
 		
 		JLabel lblMostrarDatos = new JLabel("");

@@ -1,9 +1,11 @@
 package Dominio;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -40,53 +42,12 @@ public class Ejercicio2 extends JFrame {
 
     public Ejercicio2() {
         setTitle("Promedio");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 400, 350);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 602, 481);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        
-        
-        JLabel lblTituloEntrada = new JLabel("Notas del estudiante");
-        lblTituloEntrada.setBounds(40, 20, 150, 20);
-        contentPane.add(lblTituloEntrada);
-        
-        JLabel lblNota1 = new JLabel("Nota 1:");
-        lblNota1.setBounds(50, 50, 60, 20);
-        contentPane.add(lblNota1);
-        
-        txtNota1 = new JTextField();
-        txtNota1.setBounds(110, 50, 150, 20);
-        contentPane.add(txtNota1);
-        txtNota1.setColumns(10);
-        
-        JLabel lblNota2 = new JLabel("Nota 2:");
-        lblNota2.setBounds(50, 80, 60, 20);
-        contentPane.add(lblNota2);
-        
-        txtNota2 = new JTextField();
-        txtNota2.setBounds(110, 80, 150, 20);
-        contentPane.add(txtNota2);
-        txtNota2.setColumns(10);
-        
-        JLabel lblNota3 = new JLabel("Nota 3:");
-        lblNota3.setBounds(50, 110, 60, 20);
-        contentPane.add(lblNota3);
-        
-        txtNota3 = new JTextField();
-        txtNota3.setBounds(110, 110, 150, 20);
-        contentPane.add(txtNota3);
-        txtNota3.setColumns(10);
-        
-        JLabel lblTP = new JLabel("TP:");
-        lblTP.setBounds(50, 145, 60, 20);
-        contentPane.add(lblTP);
-        
-        cbTP = new JComboBox<>();
-        cbTP.setModel(new DefaultComboBoxModel<>(new String[] {"Aprobado", "Desaprobado"}));
-        cbTP.setBounds(110, 140, 150, 30);
-        contentPane.add(cbTP);
         
         
         
@@ -97,7 +58,7 @@ public class Ejercicio2 extends JFrame {
                 calcularResultado();
             }
         });
-        btnCalcular.setBounds(274, 99, 100, 30);
+        btnCalcular.setBounds(312, 31, 100, 30);
         contentPane.add(btnCalcular);
         
         
@@ -108,7 +69,7 @@ public class Ejercicio2 extends JFrame {
                 limpiarCampos();
             }
         });
-        btnNuevo.setBounds(274, 140, 100, 30);
+        btnNuevo.setBounds(312, 83, 100, 30);
         contentPane.add(btnNuevo);
         
         
@@ -119,43 +80,103 @@ public class Ejercicio2 extends JFrame {
                 System.exit(0);
             }
         });
-        btnSalir.setBounds(274, 189, 100, 30);
+        btnSalir.setBounds(312, 134, 100, 30);
         contentPane.add(btnSalir);
         
+        JPanel panelNotas = new JPanel();
+        panelNotas.setBorder(BorderFactory.createTitledBorder(
+       BorderFactory.createLineBorder(new Color(144, 192, 215)), "Notas del estudiante"));
+        panelNotas.setBounds(24, 18, 270, 170);
+        contentPane.add(panelNotas);
+        panelNotas.setLayout(null);
         
+        JLabel lblNota1 = new JLabel("Nota 1:");
+        lblNota1.setBounds(10, 26, 60, 20);
+        panelNotas.add(lblNota1);
         
+        JLabel lblNota2 = new JLabel("Nota 2:");
+        lblNota2.setBounds(10, 57, 60, 20);
+        panelNotas.add(lblNota2);
         
-        JLabel lblTituloResultados = new JLabel("Notas del estudiante");
-        lblTituloResultados.setBounds(38, 199, 150, 20);
-        contentPane.add(lblTituloResultados);
+        JLabel lblNota3 = new JLabel("Nota 3:");
+        lblNota3.setBounds(10, 88, 60, 20);
+        panelNotas.add(lblNota3);
+        
+        txtNota1 = new JTextField();
+        txtNota1.setBounds(80, 26, 150, 20);
+        panelNotas.add(txtNota1);
+        txtNota1.setColumns(10);
+        
+        txtNota2 = new JTextField();
+        txtNota2.setBounds(80, 57, 150, 20);
+        panelNotas.add(txtNota2);
+        txtNota2.setColumns(10);
+        
+        txtNota3 = new JTextField();
+        txtNota3.setBounds(80, 88, 150, 20);
+        panelNotas.add(txtNota3);
+        txtNota3.setColumns(10);
+        
+        JLabel lblTP = new JLabel("TPS");
+        lblTP.setBounds(10, 124, 60, 20);
+        panelNotas.add(lblTP);
+        
+        cbTP = new JComboBox<>();
+        cbTP.setBounds(80, 119, 150, 30);
+        panelNotas.add(cbTP);
+        cbTP.setModel(new DefaultComboBoxModel<>(new String[] {"Aprobado", "Desaprobado"}));
+        
+        JPanel panelPromedio = new JPanel();
+        panelPromedio.setBorder(BorderFactory.createTitledBorder(
+        BorderFactory.createLineBorder(new Color(144, 192, 215)), "Notas del estudiante"));
+        panelPromedio.setBounds(24, 199, 270, 157);
+        contentPane.add(panelPromedio);
+        panelPromedio.setLayout(null);
         
         JLabel lblPromedio = new JLabel("Promedio:");
-        lblPromedio.setBounds(48, 230, 80, 20);
-        contentPane.add(lblPromedio);
+        lblPromedio.setBounds(10, 31, 80, 20);
+        panelPromedio.add(lblPromedio);
         
         txtPromedio = new JTextField();
+        txtPromedio.setBackground(new Color(255, 255, 255));
+        txtPromedio.setBounds(100, 31, 124, 20);
+        panelPromedio.add(txtPromedio);
         txtPromedio.setEditable(false);
-        txtPromedio.setBounds(150, 230, 100, 20);
-        contentPane.add(txtPromedio);
         txtPromedio.setColumns(10);
         
-        JLabel lblCondicion = new JLabel("Condición:");
-        lblCondicion.setBounds(48, 260, 80, 20);
-        contentPane.add(lblCondicion);
-        
         txtCondicion = new JTextField();
+        txtCondicion.setBackground(new Color(255, 255, 255));
+        txtCondicion.setBounds(100, 62, 124, 20);
+        panelPromedio.add(txtCondicion);
         txtCondicion.setEditable(false);
-        txtCondicion.setBounds(150, 261, 100, 20);
-        contentPane.add(txtCondicion);
         txtCondicion.setColumns(10);
+        
+        JLabel lblCondicion = new JLabel("Condición:");
+        lblCondicion.setBounds(10, 62, 80, 20);
+        panelPromedio.add(lblCondicion);
     }
     
     private void calcularResultado() {
         try {
+        	
+        	 if (txtNota1.getText().isEmpty() ||
+		        txtNota2.getText().isEmpty() ||
+		        txtNota3.getText().isEmpty()) {
+
+		        JOptionPane.showMessageDialog(this,
+		            "Por favor complete todos los campos de notas antes de calcular.","Campos incompletos", JOptionPane.WARNING_MESSAGE);
+		        return; 
+		    }
             
             double nota1 = Double.parseDouble(txtNota1.getText());
             double nota2 = Double.parseDouble(txtNota2.getText());
             double nota3 = Double.parseDouble(txtNota3.getText());         
+            
+            if (nota1 < 1 || nota1 > 10 || nota2 < 1 || nota2 > 10 || nota3 < 1 || nota3 > 10) {
+                JOptionPane.showMessageDialog(this,
+                    "Las notas deben estar entre 1 y 10.", "Valores fuera de rango", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             
             String tpEstado = (String) cbTP.getSelectedItem();
             
@@ -169,7 +190,15 @@ public class Ejercicio2 extends JFrame {
             
             if (tpEstado.equals("Desaprobado") || nota1 < 6 || nota2 < 6 || nota3 < 6) {
                 condicion = "Libre";
-            }           
+            }   
+            
+            else if (tpEstado.equals("Aprobado") && promedio >= 8) {
+                condicion = "Promocionado";
+            } 
+            
+            else if (tpEstado.equals("Aprobado") && promedio >= 6 && promedio < 8) {
+                condicion = "Regular";
+            } 
           
             
             txtCondicion.setText(condicion);
@@ -179,6 +208,7 @@ public class Ejercicio2 extends JFrame {
         }
     }
     
+
     private void limpiarCampos() {
         txtNota1.setText("");
         txtNota2.setText("");
