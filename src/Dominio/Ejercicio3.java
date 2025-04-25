@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
+import java.awt.Font;
 
 public class Ejercicio3 extends JFrame {
 
@@ -24,7 +26,9 @@ public class Ejercicio3 extends JFrame {
 	private JRadioButton rdbtnWindows;
 	private JRadioButton rdbtnMac;
 	private JRadioButton rdbtnLinux;
-
+	private JCheckBox chProgramacion;
+	private JCheckBox chAdministracion;
+	private JCheckBox chDiseñoGrafico;
 	/**
 	 * Launch the application.
 	 */
@@ -46,7 +50,7 @@ public class Ejercicio3 extends JFrame {
 	 */
 	public Ejercicio3() {
 		setTitle("Selección multiple");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 500, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -90,6 +94,23 @@ public class Ejercicio3 extends JFrame {
 		contentPane.add(panelEspecialidad);
 		panelEspecialidad.setLayout(null);
 		
+		 chProgramacion = new JCheckBox("Programacion");
+		chProgramacion.setBounds(234, 7, 121, 23);
+		panelEspecialidad.add(chProgramacion);
+		
+		 chAdministracion = new JCheckBox("Administracion");
+		chAdministracion.setBounds(234, 33, 121, 23);
+		panelEspecialidad.add(chAdministracion);
+		
+		 chDiseñoGrafico = new JCheckBox("Diseño Grafico");
+		chDiseñoGrafico.setBounds(234, 59, 121, 23);
+		panelEspecialidad.add(chDiseñoGrafico);
+		
+
+		JLabel lblElijeUnaEspecialidad = new JLabel("Elije una especialidad");
+		lblElijeUnaEspecialidad.setBounds(42, 34, 150, 21);
+		panelEspecialidad.add(lblElijeUnaEspecialidad);
+		
 		JLabel lblNewLabel_1 = new JLabel("Cantidad de horas en el computador:");
 		lblNewLabel_1.setBounds(66, 187, 222, 14);
 		contentPane.add(lblNewLabel_1);
@@ -101,11 +122,15 @@ public class Ejercicio3 extends JFrame {
 		
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 
 				String sistema=seleccionSistema();
+				String especialidad = seleccionEspecialidad();
+				String horas = obtenerHoras();
 				
-			mostrarInformacion(sistema);
+				
+			mostrarInformacion(sistema,especialidad,horas);
 			}
 		});
 		btnNewButton.setBounds(340, 225, 89, 23);
@@ -129,10 +154,46 @@ public class Ejercicio3 extends JFrame {
 		return "Sin selección de sistema";
 	}
 	
+	private String seleccionEspecialidad() {
+	    StringBuilder especialidades = new StringBuilder();
+
+	    if (chProgramacion.isSelected()) {
+	        especialidades.append("Programación, ");
+	    }
+	    if (chAdministracion.isSelected()) {
+	        especialidades.append("Administración, ");
+	    }
+	    if (chDiseñoGrafico.isSelected()) {
+	        especialidades.append("Diseño Gráfico, ");
+	    }
+
+	    if (especialidades.length() == 0) {
+	        return "No seleccionó Especialidad";
+	    } else {
+	        return especialidades.substring(0, especialidades.length() - 2);
+	    }
+	}
 	
-	private void mostrarInformacion(String sistema) {
+	private String obtenerHoras() {
+		String horasTxt = txtHoras.getText().trim();
+		if (horasTxt.isEmpty()) {
+			return "No se ingresaron horas";
+		}
+		try {
+			int horas= Integer.parseInt(horasTxt);
+			if(horas<0) {
+				return "Las horas ingresadas no son validas";
+			}else {
+				return horas+" Horas";
+			}
+		}catch(NumberFormatException ex){
+			return "Debe ser un numero";
+		}
+	}	
 	
-		JOptionPane.showMessageDialog(this,sistema+"-","Mensaje", JOptionPane.INFORMATION_MESSAGE);
+	private void mostrarInformacion(String sistema,String especialidad,String horas) {
+	
+		JOptionPane.showMessageDialog(this,sistema+"-"+ especialidad+"-"+horas,"Mensaje", JOptionPane.INFORMATION_MESSAGE);
 	}
 }
 
