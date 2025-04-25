@@ -1,5 +1,6 @@
 package Dominio;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -41,7 +42,7 @@ public class Ejercicio1 extends JFrame {
 	 */
 	public Ejercicio1() {
 		setTitle("Ejercicio 1");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // CAMBIO PARA CERRAR SOLO LA VENTANA DE EJERCICIO 1
 		setBounds(100, 100, 474, 344);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,12 +100,50 @@ public class Ejercicio1 extends JFrame {
 		
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				textNombre.setBackground(Color.white);
+				textApellido.setBackground(Color.white);
+				textTelefono.setBackground(Color.white);
+				textFechaNac.setBackground(Color.white);
+				
 				String nombre = textNombre.getText().trim();
 				String apellido = textApellido.getText().trim();
 				String telefono = textTelefono.getText().trim();
 				String fechanac= textFechaNac.getText().trim();
 				
-				lblMostrarDatos.setText("Persona: " + nombre + " " + apellido +" - FechaNac: " + fechanac + " - Tel: " + telefono);
+				boolean camposVacios = false;
+				
+				if(nombre.isEmpty()) {
+					textNombre.setBackground(Color.red);
+					camposVacios = true;
+				}
+				if(apellido.isEmpty()) {
+					textApellido.setBackground(Color.red);
+					camposVacios = true;
+				}
+				if(telefono.isEmpty()) {
+					textTelefono.setBackground(Color.red);
+					camposVacios = true;
+				}
+				
+				if(fechanac.isEmpty()) {
+					textFechaNac.setBackground(Color.red);
+					camposVacios = true;
+				}
+				
+				
+				if(!camposVacios) {
+					lblMostrarDatos.setText("Persona: " + nombre + " " + apellido +" - FechaNac: " + fechanac + " - Tel: " + telefono);
+					textNombre.setText("");
+					textApellido.setText("");
+					textTelefono.setText("");
+					textFechaNac.setText("");
+					
+				}
+				else {
+					lblMostrarDatos.setText("Hay campos incompletos");
+				}
+				
 			}
 		});
 		
