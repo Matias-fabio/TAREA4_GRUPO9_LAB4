@@ -124,7 +124,7 @@ public class Ejercicio3 extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-
+				try {
 				String sistema=seleccionSistema();
 				String especialidad = seleccionEspecialidad();
 				String horas = obtenerHoras();
@@ -132,7 +132,11 @@ public class Ejercicio3 extends JFrame {
 				
 			mostrarInformacion(sistema,especialidad,horas);
 			}
-		});
+			catch(Exception ex){
+	            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+			}
+			}
+			});
 		btnNewButton.setBounds(340, 225, 89, 23);
 		contentPane.add(btnNewButton);
 		
@@ -141,7 +145,7 @@ public class Ejercicio3 extends JFrame {
 		
 	}
 	
-	private String seleccionSistema() {
+	private String seleccionSistema() throws Exception {
 
 		if (rdbtnWindows.isSelected()) {
 		return"Windows";}
@@ -151,10 +155,10 @@ public class Ejercicio3 extends JFrame {
 		else if (rdbtnLinux.isSelected()) {
 			return "Linux";
 		}
-		return "Sin selección de sistema";
+		throw new Exception("Debe seleccionar un sistema operativo");
 	}
 	
-	private String seleccionEspecialidad() {
+	private String seleccionEspecialidad() throws Exception {
 	    StringBuilder especialidades = new StringBuilder();
 
 	    if (chProgramacion.isSelected()) {
@@ -168,26 +172,26 @@ public class Ejercicio3 extends JFrame {
 	    }
 
 	    if (especialidades.length() == 0) {
-	        return "No seleccionó Especialidad";
+			throw new Exception("Debe seleccionar al menos una especialidad");
 	    } else {
 	        return especialidades.substring(0, especialidades.length() - 2);
 	    }
 	}
 	
-	private String obtenerHoras() {
+	private String obtenerHoras() throws Exception{
 		String horasTxt = txtHoras.getText().trim();
 		if (horasTxt.isEmpty()) {
-			return "No se ingresaron horas";
+			throw new Exception("No se ingresaron horas");
 		}
 		try {
 			int horas= Integer.parseInt(horasTxt);
-			if(horas<0) {
-				return "Las horas ingresadas no son validas";
+			if(horas<=0) {
+				throw new Exception("Las horas ingresadas no son validas");
 			}else {
 				return horas+" Horas";
 			}
 		}catch(NumberFormatException ex){
-			return "Debe ser un numero";
+			throw new Exception("La hora ingresada debe ser un numero");
 		}
 	}	
 	
